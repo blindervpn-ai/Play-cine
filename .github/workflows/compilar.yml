@@ -1,4 +1,3 @@
-
 name: Gerar APK Rebrand
 
 on:
@@ -71,7 +70,7 @@ jobs:
       - name: Baixar e Converter Imagens
         run: |
           RESELLER_ID="${{ github.event.inputs.reseller_id }}"
-          ASSETS=$(curl -s -H "X-Auth-Token: B7f9a2XkP1mQz8vL4wYc" "https://worker-codigos.blindervpn.workers.dev/?action=get_rebrand_assets&reseller_id=$RESELLER_ID")
+          ASSETS=$(curl -s -H "X-Auth-Token: 17out1986" "https://worker-codigos.blindervpn.workers.dev/?action=get_rebrand_assets&reseller_id=$RESELLER_ID")
           
           LOGO_B64=$(echo "$ASSETS" | jq -r '.logo_b64 // empty')
           BG_B64=$(echo "$ASSETS" | jq -r '.bg_b64 // empty')
