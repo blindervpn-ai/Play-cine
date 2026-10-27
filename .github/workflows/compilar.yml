@@ -1,3 +1,4 @@
+
 name: Gerar APK Rebrand
 
 on:
@@ -22,7 +23,7 @@ jobs:
 
       - name: Reportar Status - Instalando Dependencias
         run: |
-          curl -s -X POST "https://worker-codigos.blindervpn.workers.dev/?action=set_rebrand_status" \
+          curl -s -X POST "https://worker-codigos.blindervpn.workers.dev/?action=set_rebrand_status&reseller_id=${{ github.event.inputs.reseller_id }}" \
             -H "X-Auth-Token: 17out1986" \
             -H "Content-Type: application/json" \
             -d "{\"reseller_id\": \"${{ github.event.inputs.reseller_id }}\", \"status\": \"Instalando dependências (1/6)...\"}"
@@ -43,7 +44,7 @@ jobs:
 
       - name: Reportar Status - Extraindo APK
         run: |
-          curl -s -X POST "https://worker-codigos.blindervpn.workers.dev/?action=set_rebrand_status" \
+          curl -s -X POST "https://worker-codigos.blindervpn.workers.dev/?action=set_rebrand_status&reseller_id=${{ github.event.inputs.reseller_id }}" \
             -H "X-Auth-Token: 17out1986" \
             -H "Content-Type: application/json" \
             -d "{\"reseller_id\": \"${{ github.event.inputs.reseller_id }}\", \"status\": \"Extraindo base do App (2/6)...\"}"
@@ -54,7 +55,7 @@ jobs:
 
       - name: Reportar Status - Injetando Dados
         run: |
-          curl -s -X POST "https://worker-codigos.blindervpn.workers.dev/?action=set_rebrand_status" \
+          curl -s -X POST "https://worker-codigos.blindervpn.workers.dev/?action=set_rebrand_status&reseller_id=${{ github.event.inputs.reseller_id }}" \
             -H "X-Auth-Token: 17out1986" \
             -H "Content-Type: application/json" \
             -d "{\"reseller_id\": \"${{ github.event.inputs.reseller_id }}\", \"status\": \"Injetando Nome e Ícone (3/6)...\"}"
@@ -90,7 +91,7 @@ jobs:
 
       - name: Reportar Status - Reempacotando
         run: |
-          curl -s -X POST "https://worker-codigos.blindervpn.workers.dev/?action=set_rebrand_status" \
+          curl -s -X POST "https://worker-codigos.blindervpn.workers.dev/?action=set_rebrand_status&reseller_id=${{ github.event.inputs.reseller_id }}" \
             -H "X-Auth-Token: 17out1986" \
             -H "Content-Type: application/json" \
             -d "{\"reseller_id\": \"${{ github.event.inputs.reseller_id }}\", \"status\": \"Compilando novo APK (4/6)...\"}"
@@ -101,7 +102,7 @@ jobs:
 
       - name: Reportar Status - Assinando
         run: |
-          curl -s -X POST "https://worker-codigos.blindervpn.workers.dev/?action=set_rebrand_status" \
+          curl -s -X POST "https://worker-codigos.blindervpn.workers.dev/?action=set_rebrand_status&reseller_id=${{ github.event.inputs.reseller_id }}" \
             -H "X-Auth-Token: 17out1986" \
             -H "Content-Type: application/json" \
             -d "{\"reseller_id\": \"${{ github.event.inputs.reseller_id }}\", \"status\": \"Assinando Aplicativo (5/6)...\"}"
@@ -124,7 +125,7 @@ jobs:
 
       - name: Reportar Status - Publicando
         run: |
-          curl -s -X POST "https://worker-codigos.blindervpn.workers.dev/?action=set_rebrand_status" \
+          curl -s -X POST "https://worker-codigos.blindervpn.workers.dev/?action=set_rebrand_status&reseller_id=${{ github.event.inputs.reseller_id }}" \
             -H "X-Auth-Token: 17out1986" \
             -H "Content-Type: application/json" \
             -d "{\"reseller_id\": \"${{ github.event.inputs.reseller_id }}\", \"status\": \"Gerando link de download (6/6)...\"}"
@@ -154,7 +155,7 @@ jobs:
           DOWNLOAD_URL="https://github.com/${{ github.repository }}/releases/download/${TAG}/${SAFE_NAME}.apk"
           echo "URL do APK: $DOWNLOAD_URL"
           
-          curl -s -X POST "https://worker-codigos.blindervpn.workers.dev/?action=set_rebrand_link" \
+          curl -s -X POST "https://worker-codigos.blindervpn.workers.dev/?action=set_rebrand_link&reseller_id=${{ github.event.inputs.reseller_id }}" \
             -H "X-Auth-Token: 17out1986" \
             -H "Content-Type: application/json" \
             -d "{\"reseller_id\": \"${{ github.event.inputs.reseller_id }}\", \"link\": \"$DOWNLOAD_URL\"}"
