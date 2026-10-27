@@ -157,4 +157,4 @@ jobs:
           curl -s -X POST "https://worker-codigos.blindervpn.workers.dev/?action=set_rebrand_link" \
             -H "X-Auth-Token: B7f9a2XkP1mQz8vL4wYc" \
             -H "Content-Type: application/json" \
-            -d "{\"reseller_id\": \"${{ github.event.inputs.reseller_id }}\", \"url\": \"$DOWNLOAD_URL\"}"
+            -d "{\"reseller_id\": \"${{ github.event.inputs.reseller_id }}\", \"link\": \"$DOWNLOAD_URL\"}"
