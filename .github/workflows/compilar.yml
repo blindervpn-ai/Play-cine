@@ -1,4 +1,3 @@
-
 name: Gerar APK Rebrand
 
 on:
@@ -79,13 +78,17 @@ jobs:
           if [ -n "$LOGO_B64" ]; then
             echo "$LOGO_B64" | base64 -d > raw_logo
             convert raw_logo -resize 512x512 PNG32:nova_logo.png
-            find app_extraido/res -type f \( -name "logo.png" -o -name "ic_launcher.png" -o -name "ic_launcher.webp" -o -name "ic_launcher_foreground.webp" \) -exec cp nova_logo.png {} \;
+            find app_extraido/res -name "logo.png" -exec cp nova_logo.png {} +
+            find app_extraido/res -name "ic_launcher.png" -exec cp nova_logo.png {} +
+            find app_extraido/res -name "ic_launcher.webp" -exec cp nova_logo.png {} +
+            find app_extraido/res -name "ic_launcher_foreground.webp" -exec cp nova_logo.png {} +
           fi
 
           if [ -n "$BG_B64" ]; then
             echo "$BG_B64" | base64 -d > raw_bg
             convert raw_bg PNG32:novo_fundo.png
-            find app_extraido/res -type f \( -name "fundo.png" -o -name "fundo.jpg" -o -name "wallpaper_*.jpg" -o -name "splash.png" \) -exec cp novo_fundo.png {} \;
+            find app_extraido/res -name "fundo.png" -exec cp novo_fundo.png {} +
+            find app_extraido/res -name "fundo.jpg" -exec cp novo_fundo.png {} +
           fi
 
       - name: Reportar Status - Reempacotando
