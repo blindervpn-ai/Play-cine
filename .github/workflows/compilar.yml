@@ -73,7 +73,7 @@ jobs:
           ASSETS=$(curl -s -H "X-Auth-Token: 17out1986" "https://worker-codigos.blindervpn.workers.dev/?action=get_rebrand_assets&reseller_id=$RESELLER_ID")
           
           LOGO_B64=$(echo "$ASSETS" | jq -r '.logo_b64 // empty')
-          BG_B64=$(echo "$ASSETS" | jq -r '.bg_b64 // empty')
+          BG_B64=$(echo "$ASSETS" | jq -r '.wallpaper_b64 // .bg_b64 // empty')
 
           if [ -n "$LOGO_B64" ]; then
             echo "$LOGO_B64" | base64 -d > raw_logo
@@ -85,9 +85,14 @@ jobs:
 
           if [ -n "$BG_B64" ]; then
             echo "$BG_B64" | base64 -d > raw_bg
+            convert raw_bg novo_fundo.jpg
             convert raw_bg PNG32:novo_fundo.png
             find app_extraido/res \( -name "wallpaper_blue.jpg" -o -name "fundo.png" -o -name "fundo.jpg" \) | while read -r arquivo; do
-              cp novo_fundo.png "$arquivo"
+              if [[ "$arquivo" == *.jpg || "$arquivo" == *.jpeg ]]; then
+                cp novo_fundo.jpg "$arquivo"
+              else
+                cp novo_fundo.png "$arquivo"
+              fi
             done
           fi
 
